@@ -1,48 +1,13 @@
-from flask import Flask, Response
-import requests
-import json
+import time
+import datetime
+import pandas as pd
 
-app = Flask(__name__)
+ticker = 'AAPL'
+period1 = int(time.mktime(datetime.datetime(2020, 12, 1, 23, 59).timetuple()))
+period2 = int(time.mktime(datetime.datetime(2020, 12, 31, 23, 59).timetuple()))
+interval = '1d' # 1d, 1m
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-    
-@app.route("/catfact")
-def catfact():
+query_string = f'https://query1.finance.yahoo.com/v7/finance/download/{ticker}?period1={period1}&period2={period2}&interval={interval}&events=history&includeAdjustedClose=true'
 
-    url = "https://catfact.ninja/fact"
-    r = requests.get(url)
-    fact = r.json()
-    printable_fact = fact['fact']
-    #print to console
-    print("Did you know?: " + printable_fact)
-    return Response(json.dumps(fact))
-
-@app.route("/get-price/<ticker>")
-def get_price(ticker):
-    url = f"https://query2.finance.yahoo.com/v10/finance/quoteSummary/{ticker}?modules=price%2CsummaryDetail%2CpageViews%2CfinancialsTemplate"
-    headers={'User-Agent': 'Mozilla/5.0'}
-    response = requests.get(url,headers=headers)
-    company_info = response.json()
-
-    print(company_info)
-
-    price = company_info['quoteSummary']['result'][0]['price']['regularMarketPrice']['raw']
-    company_name = company_info['quoteSummary']['result'][0]['price']['longName']
-    exchange = company_info['quoteSummary']['result'][0]['price']['exchangeName']
-    currency = company_info['quoteSummary']['result'][0]['price']['currency']
-
-    result = {
-        "precio": price,
-        "nombre": company_name,
-        "exchange": exchange,
-        "currency": currency
-    }
-    print(result)
-
-    return Response(json.dumps(result))
-
-if __name__ == '__main__':
-    app.run()
-
+df = pd.read_csv(query_string)
+print(df)
