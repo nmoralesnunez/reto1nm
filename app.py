@@ -1,7 +1,7 @@
 from flask import Flask, Response
 import requests
 import json
-
+heroku ps:scale web=1
 app = Flask(__name__)
 
 @app.route("/")
