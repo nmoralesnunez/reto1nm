@@ -27,7 +27,7 @@ interval = '1d' # 1d, 1m
 query_string = f'https://query1.finance.yahoo.com/v7/finance/download/{ticker}?period1={period1}&period2={period2}&interval={interval}&events=history&includeAdjustedClose=true'
 
 df = pd.read_csv(query_string)
-print(df)
+return print(df)
 #*****************************
 @app.route("/get-price/<ticker>")
 def get_price(ticker):
