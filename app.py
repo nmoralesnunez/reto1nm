@@ -1,12 +1,14 @@
 from flask import Flask, Response
 import requests
 import json
+import panda as pd
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
     query_string = f'https://query1.finance.yahoo.com/v7/finance/download/{ticker}?period1={period1}&period2={period2}&interval={interval}&events=history&includeAdjustedClose=true'
+    df = pd.read_csv(query_string)
     return query_string
     
 @app.route("/catfact")
