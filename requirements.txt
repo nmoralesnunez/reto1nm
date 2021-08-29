@@ -5,4 +5,3 @@ Flask==2.0.1
 requests==2.26.0
 urllib3==1.26.6
 gunicorn
-heroku ps:scale web=1
