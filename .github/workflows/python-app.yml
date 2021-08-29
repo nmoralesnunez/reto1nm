@@ -36,7 +36,7 @@ jobs:
         pytest
     - uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        heroku_api_key: 76e9507e-c4af-4a90-b60c-2de37931b741
+        heroku_api_key: ${{secrets.HEROKU_SECRET}}
         heroku_app_name: "heroku-nm"
         heroku_email:  mateomorales288@gmail.com
         buildpack: 'heroku/python'
