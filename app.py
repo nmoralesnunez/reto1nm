@@ -34,8 +34,8 @@ def get_price(ticker):
     currency = company_info['quoteSummary']['result'][0]['price']['currency']
 
     result = {
-        "price": price,
-        "name": company_name,
+        "precio": price,
+        "nombre": company_name,
         "exchange": exchange,
         "currency": currency
     }
