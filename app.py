@@ -10,25 +10,12 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
-#@app.route("/")
-#def hello_world():
-   # return "<p>Hello, World!</p>"
-   
-#*****************************
-import time
-import datetime
-import pandas as pd
 @app.route("/")
-ticker = 'AAPL'
-period1 = int(time.mktime(datetime.datetime(2020, 12, 1, 23, 59).timetuple()))
-period2 = int(time.mktime(datetime.datetime(2020, 12, 31, 23, 59).timetuple()))
-interval = '1d' # 1d, 1m
+def hello_world():
+    return "<p>Hello, World!</p>"
 
-query_string = f'https://query1.finance.yahoo.com/v7/finance/download/{ticker}?period1={period1}&period2={period2}&interval={interval}&events=history&includeAdjustedClose=true'
 
-df = pd.read_csv(query_string)
-return print(df)
-#*****************************
+
 @app.route("/get-price/<ticker>")
 def get_price(ticker):
     url = f"https://query2.finance.yahoo.com/v10/finance/quoteSummary/{ticker}?modules=price%2CsummaryDetail%2CpageViews%2CfinancialsTemplate"
