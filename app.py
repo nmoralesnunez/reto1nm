@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.DEBUG)
 import time
 import datetime
 import pandas as pd
-
+@app.route("/")
 ticker = 'AAPL'
 period1 = int(time.mktime(datetime.datetime(2020, 12, 1, 23, 59).timetuple()))
 period2 = int(time.mktime(datetime.datetime(2020, 12, 31, 23, 59).timetuple()))
